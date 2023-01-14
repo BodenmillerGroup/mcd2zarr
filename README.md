@@ -70,6 +70,10 @@ myfile.zarr
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
+## Changelog
+
+[Changelog](https://github.com/BodenmillerGroup/mcd2zarr/blob/main/CHANGELOG.md)
+
 ## License
 
-[MIT](https://github.com/BodenmillerGroup/mcd2zarr/blob/main/LICENSE)
+[License](https://github.com/BodenmillerGroup/mcd2zarr/blob/main/LICENSE)
