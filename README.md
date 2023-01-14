@@ -15,7 +15,6 @@ pip install mcd2zarr
 Call `mcd2zarr` on the command line:
 
 ```
-> mcd2zarr --help
 Usage: mcd2zarr [OPTIONS] MCD_FILE [ZARR_FILE]
 
   Convert MCD files to Zarr
