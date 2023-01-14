@@ -30,44 +30,18 @@ def convert_mcd_to_zarr(
         zarr_group.attrs["mcd_schema"] = f.metadata
         zarr_group.attrs["slide_groups"] = slide_group_names
         for slide, slide_group_name in zip(f.slides, slide_group_names):
-            panorama_group_names = [
-                f"P{panorama.id:02d}_{panorama.description}"
-                for panorama in slide.panoramas
-            ]
             acquisition_group_names = [
                 f"A{acquisition.id:02d}_{acquisition.description}"
                 for acquisition in slide.acquisitions
             ]
+            panorama_group_names = [
+                f"P{panorama.id:02d}_{panorama.description}"
+                for panorama in slide.panoramas
+            ]
             slide_group = zarr_group.create_group(slide_group_name, overwrite=True)
             slide_group.attrs["slide_metadata"] = slide.metadata
-            slide_group.attrs["panorama_groups"] = panorama_group_names
             slide_group.attrs["acquisition_groups"] = acquisition_group_names
-            for panorama, panorama_group_name in zip(
-                slide.panoramas, panorama_group_names
-            ):
-                panorama_img = f.read_panorama(panorama)
-                if panorama_img.ndim == 2:
-                    panorama_axes = ["y", "x"]
-                elif panorama_img.ndim == 3:
-                    panorama_img = np.moveaxis(panorama_img, -1, 0)
-                    panorama_axes = ["c", "y", "x"]
-                else:
-                    warn(
-                        f"Cannot guess axes for {panorama_img.ndim}-dimensional "
-                        f"panorama {panorama.id} ('{panorama.description}'); skipping"
-                    )
-                    continue
-                panorama_group = slide_group.create_group(
-                    panorama_group_name, overwrite=True
-                )
-                panorama_group.attrs["panorama_metadata"] = panorama.metadata
-                write_image(
-                    panorama_img,
-                    panorama_group,
-                    scaler=None,
-                    fmt=ome_zarr_format,
-                    axes=panorama_axes,
-                )  # TODO coordinate_transformations
+            slide_group.attrs["panorama_groups"] = panorama_group_names
             for acquisition, acquisition_group_name in zip(
                 slide.acquisitions, acquisition_group_names
             ):
@@ -134,3 +108,29 @@ def convert_mcd_to_zarr(
                         fmt=ome_zarr_format,
                         axes=["y", "x"],
                     )  # TODO coordinate_transformations
+            for panorama, panorama_group_name in zip(
+                slide.panoramas, panorama_group_names
+            ):
+                panorama_img = f.read_panorama(panorama)
+                if panorama_img.ndim == 2:
+                    panorama_axes = ["y", "x"]
+                elif panorama_img.ndim == 3:
+                    panorama_img = np.moveaxis(panorama_img, -1, 0)
+                    panorama_axes = ["c", "y", "x"]
+                else:
+                    warn(
+                        f"Cannot guess axes for {panorama_img.ndim}-dimensional "
+                        f"panorama {panorama.id} ('{panorama.description}'); skipping"
+                    )
+                    continue
+                panorama_group = slide_group.create_group(
+                    panorama_group_name, overwrite=True
+                )
+                panorama_group.attrs["panorama_metadata"] = panorama.metadata
+                write_image(
+                    panorama_img,
+                    panorama_group,
+                    scaler=None,
+                    fmt=ome_zarr_format,
+                    axes=panorama_axes,
+                )  # TODO coordinate_transformations
