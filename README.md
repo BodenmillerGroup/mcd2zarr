@@ -1,6 +1,6 @@
 # mcd2zarr
 
-Convert MCD files to Zarr
+Command line tool to convert MCD files to Zarr
 
 ## Installation
 
