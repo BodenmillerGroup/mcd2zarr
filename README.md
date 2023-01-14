@@ -36,17 +36,17 @@ myfile.zarr
 ├── .zattrs  (mcd_file, mcd_schema, slide_groups)
 ├── .zgroups
 │
-├── S01_SlideDescription01
-├── S02_SlideDescription02
+├── S01_SlideDescription
+├── S02_SlideDescription
 ├── ...
-└── Snn_SlideDescriptionNN
+└── Snn_SlideDescription
     ├── .zattrs  (slide_metadata, acquisition_groups, panorama_groups)
     ├── .zgroups
     │
-    ├── Ann_AcquisitionDescriptionNN
-    ├── A02_AcquisitionDescription02
+    ├── A01_AcquisitionDescription
+    ├── A02_AcquisitionDescription
     ├── ...
-    ├── Ann_AcquisitionDescriptionNN  (in OME-Zarr format)
+    ├── Ann_AcquisitionDescription  (in OME-Zarr format)
     │   ├── .zattrs  (acquisition_metadata, has_before_ablation_image, has_after_ablation_image)
     │   ├── .zgroups
     │   │
@@ -58,10 +58,10 @@ myfile.zarr
     |       ├── .zattrs
     |       └── .zgroups
     │
-    ├── P01_PanoramaDescription01
-    ├── P02_PanoramaDescription02
+    ├── P01_PanoramaDescription
+    ├── P02_PanoramaDescription
     ├── ...
-    └── Pnn_PanoramaDescriptionNN  (in OME-Zarr format)
+    └── Pnn_PanoramaDescription  (in OME-Zarr format)
         ├── .zattrs  (panorama_metadata)
         └── .zgroups
 ```
