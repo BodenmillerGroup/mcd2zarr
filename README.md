@@ -65,6 +65,12 @@ myfile.zarr
         └── .zgroups
 ```
 
+## Authors
+
+Created by Jonas Windhager [jonas@windhager.io](mailto:jonas@windhager.io)
+
+Maintained by Milad Adibi [milad.adibi@uzh.ch](mailto:milad.adibi@uzh.ch)
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
